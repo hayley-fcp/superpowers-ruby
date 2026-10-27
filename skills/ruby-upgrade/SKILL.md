@@ -161,7 +161,7 @@ bundle exec tapioca gem     # only if the project uses Tapioca — regenerate RB
 On failure: append a "Verification failures" section with the output, then
 either fix-forward the obvious cases (RBI staleness, safe RuboCop autocorrects)
 or stop and surface to the user. Do not claim success without showing passing
-output — see `superpowers-ruby:verification-before-completion`.
+output.
 
 Native-extension hint: if `bundle install` succeeded but tests crash on
 `require` of a C-extension gem, a cached `vendor/bundle` was built against the
@@ -195,5 +195,5 @@ Suggest 24-hour monitoring on whatever error tracker the project uses for:
 | Editing files that never pinned the old version | Only edit files Phase 1 found pinning it |
 | Rewriting a private registry host on the Docker image | Keep the prefix; change only the tag |
 | Adding `gem "cgi"`/`"ostruct"` blindly | Add only when the removed/demoted API is actually used |
-| Declaring "tests pass" without output | Show the passing run (verification-before-completion) |
+| Declaring "tests pass" without output | Show the passing run |
 | Confusing this with a Rails upgrade | Rails framework bump → `superpowers-ruby:rails-upgrade` |
