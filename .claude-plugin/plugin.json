@@ -1,6 +1,6 @@
 {
   "name": "superpowers-ruby",
-  "description": "Trimmed fork of superpowers-ruby with only the Rails upgrade, Ruby upgrade and Brakeman skills",
+  "description": "Trimmed fork of superpowers-ruby with only the Brakeman skill",
   "version": "7.5.0",
   "author": {
     "name": "Lucian Ghinda",
@@ -13,7 +13,6 @@
     "skills",
     "ruby",
     "rails",
-    "upgrade",
     "brakeman",
     "security"
   ]
