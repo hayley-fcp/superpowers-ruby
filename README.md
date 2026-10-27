@@ -6,13 +6,6 @@ A trimmed fork of [lucianghinda/superpowers-ruby](https://github.com/lucianghind
 
 - `brakeman`: Rails security static analysis
 
-## Install (Claude Code)
-
-```
-/plugin marketplace add hayley-fcp/superpowers-ruby
-/plugin install superpowers-ruby@superpowers-ruby
-```
-
 ## License
 
 MIT. See [LICENSE](LICENSE). All skill content is from the upstream projects.
