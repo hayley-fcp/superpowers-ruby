@@ -552,12 +552,12 @@ Try to exploit the vulnerability yourself.
 ### 2. Security Test
 Write a security-focused test:
 ```ruby
-# test/security/xss_test.rb
-test "should escape malicious content" do
+# spec/requests/security/xss_spec.rb
+it "escapes malicious content" do
   post = Post.create(content: "<script>alert('xss')</script>")
   get post_path(post)
-  assert_no_match /<script>/, response.body
-  assert_match /&lt;script&gt;/, response.body
+  expect(response.body).not_to include("<script>")
+  expect(response.body).to include("&lt;script&gt;")
 end
 ```
 

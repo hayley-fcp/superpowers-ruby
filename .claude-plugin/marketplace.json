@@ -8,7 +8,7 @@
     {
       "name": "superpowers-ruby",
       "description": "Brakeman plus process skills for Claude Code",
-      "version": "7.6.0",
+      "version": "7.7.0",
       "source": "./",
       "author": {
         "name": "Lucian Ghinda",

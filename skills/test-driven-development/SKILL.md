@@ -5,6 +5,8 @@ description: Use when implementing any feature or bugfix, before writing impleme
 
 # Test-Driven Development (TDD)
 
+**Target stack:** Ruby 3.3, Rails 8.1, RSpec (rspec-rails 8). Examples use this stack. In a project on a different stack, use its own test framework and commands.
+
 **Project rules first:** the project's CLAUDE.md and its own skills take priority over this skill wherever they differ.
 
 **Git rules:** commit only to the branch you're on. Never push unless the user asks in this conversation. Never merge, rebase or commit into any other branch (including main/master), and never deploy.
@@ -80,7 +82,7 @@ Write one minimal test showing what should happen.
 
 <Good>
 ```ruby
-test "retries failed operations 3 times" do
+it "retries failed operations 3 times" do
   attempts = 0
   operation = -> {
     attempts += 1
@@ -90,8 +92,8 @@ test "retries failed operations 3 times" do
 
   result = retry_operation(operation)
 
-  assert_equal "success", result
-  assert_equal 3, attempts
+  expect(result).to eq("success")
+  expect(attempts).to eq(3)
 end
 ```
 Clear name, tests real behavior, one thing
@@ -99,11 +101,11 @@ Clear name, tests real behavior, one thing
 
 <Bad>
 ```ruby
-test "retry works" do
+it "retry works" do
   call_count = 0
   stub_op = -> { call_count += 1 }
   retry_operation(stub_op)
-  assert_equal 3, call_count  # tests call count, not behavior
+  expect(call_count).to eq(3)  # tests call count, not behavior
 end
 ```
 Vague name, tests invocation not outcome
@@ -119,7 +121,7 @@ Vague name, tests invocation not outcome
 **MANDATORY. Never skip.**
 
 ```bash
-bin/rails test test/models/retry_test.rb
+bundle exec rspec spec/models/retry_spec.rb
 ```
 
 Confirm:
@@ -168,7 +170,7 @@ Don't add features, refactor other code, or "improve" beyond the test.
 **MANDATORY.**
 
 ```bash
-bin/rails test test/models/retry_test.rb
+bundle exec rspec spec/models/retry_spec.rb
 ```
 
 Confirm:
@@ -291,17 +293,17 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 
 **RED**
 ```ruby
-test "rejects empty email" do
+it "rejects empty email" do
   user = User.new(email: "")
-  assert_not user.valid?
-  assert_includes user.errors[:email], "can't be blank"
+  expect(user).not_to be_valid
+  expect(user.errors[:email]).to include("can't be blank")
 end
 ```
 
 **Verify RED**
 ```bash
-$ bin/rails test test/models/user_test.rb
-FAIL: expected "can't be blank" to be included in []
+$ bundle exec rspec spec/models/user_spec.rb
+Failure: expected [] to include "can't be blank"
 ```
 
 **GREEN**
@@ -313,8 +315,8 @@ end
 
 **Verify GREEN**
 ```bash
-$ bin/rails test test/models/user_test.rb
-1 runs, 1 assertions, 0 failures, 0 errors
+$ bundle exec rspec spec/models/user_spec.rb
+1 example, 0 failures
 ```
 
 **REFACTOR**

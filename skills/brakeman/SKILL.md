@@ -26,7 +26,7 @@ end
 docker pull presidentbeef/brakeman
 ```
 
-Brakeman requires Ruby 3.0.0+ to run, but can analyze code written with Ruby 2.0+ syntax. It works with Rails 2.3.x through 8.x.
+Brakeman requires Ruby 3.0.0+ to run, but can analyze code written with Ruby 2.0+ syntax. It works with Rails 2.3.x through 8.x, including the Ruby 3.3 / Rails 8.1 stack this plugin targets.
 
 ## Basic Usage
 

@@ -130,7 +130,10 @@ if [ -f go.mod ]; then go mod download; fi
 Run tests to ensure worktree starts clean:
 
 ```bash
-# Ruby on Rails
+# Ruby on Rails (RSpec)
+bundle exec rspec
+
+# Ruby on Rails (Minitest)
 bin/rails test
 
 # Other project types
@@ -196,7 +199,7 @@ You: I'm using the using-git-worktrees skill to set up an isolated workspace.
 [Create worktree: git worktree add .worktrees/auth -b feature/auth]
 [Run bundle install]
 [Run bin/rails db:test:prepare]
-[Run bin/rails test - 47 passing]
+[Run bundle exec rspec - 47 examples, 0 failures]
 
 Worktree ready at /Users/jesse/myproject/.worktrees/auth
 Tests passing (47 tests, 0 failures)

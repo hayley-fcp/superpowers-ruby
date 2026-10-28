@@ -23,11 +23,11 @@ Tests must verify real behavior, not mock behavior. Mocks are a means to isolate
 **The violation:**
 ```ruby
 # ❌ BAD: Testing that the stub was called, not what happened
-test "sidebar renders" do
-  sidebar = stub(render: "<nav>stub</nav>")
+it "renders the sidebar" do
+  sidebar = double(render: "<nav>stub</nav>")
   page = Page.new(sidebar: sidebar)
   page.render
-  assert sidebar.received_render  # testing the stub, not the page
+  expect(sidebar).to have_received(:render)  # testing the double, not the page
 end
 ```
 
@@ -40,10 +40,10 @@ end
 
 **The fix:**
 ```ruby
-# ✅ GOOD: Test real controller response or don't stub it
-test "shows navigation" do
-  get dashboard_url
-  assert_dom "nav", text: /Dashboard/  # test real output
+# ✅ GOOD: Test the real response (request spec) or don't stub it
+it "shows navigation" do
+  get dashboard_path
+  expect(response.body).to include("Dashboard")  # test real output
 end
 
 # OR if collaborator must be isolated:
@@ -75,7 +75,7 @@ class Session
 end
 
 # In tests
-teardown { @session.reset_state }
+after { session.reset_state }
 ```
 
 **Why this is wrong:**
@@ -86,17 +86,11 @@ teardown { @session.reset_state }
 
 **The fix:**
 ```ruby
-# ✅ GOOD: Use teardown helpers or fixtures, not production methods
-# Session has no reset_state — each test gets a fresh instance
+# ✅ GOOD: Use spec helpers or factories, not production methods
+# Session has no reset_state — each example gets a fresh instance
 
-# In test helper
-def new_session
-  Session.new(workspace: workspaces(:default))
-end
-
-# In tests
-setup { @session = new_session }
-# No teardown needed — fixtures wrap each test in a rolled-back transaction
+let(:session) { Session.new(workspace: create(:workspace)) }
+# No teardown needed — transactional fixtures roll back each example
 ```
 
 ### Gate Function
@@ -120,12 +114,11 @@ BEFORE adding any method to production class:
 **The violation:**
 ```ruby
 # ❌ BAD: Stub prevents side effect the test depends on
-test "detects duplicate server" do
+it "detects duplicate server" do
   # Stubbing add_to_catalog wipes out the config write!
-  ServerRegistry.stub(:add_to_catalog, nil) do
-    add_server(config)
-    add_server(config)  # Should raise — but won't!
-  end
+  allow(ServerRegistry).to receive(:add_to_catalog)
+  add_server(config)
+  add_server(config)  # Should raise — but won't!
 end
 ```
 
@@ -137,12 +130,11 @@ end
 **The fix:**
 ```ruby
 # ✅ GOOD: Stub only the slow external boundary, preserve behavior
-test "detects duplicate server" do
+it "detects duplicate server" do
   # Stub the slow HTTP call, not the config write
-  HTTPClient.stub(:connect, true) do
-    add_server(config)        # config written
-    assert_raises(DuplicateServerError) { add_server(config) }
-  end
+  allow(HTTPClient).to receive(:connect).and_return(true)
+  add_server(config)        # config written
+  expect { add_server(config) }.to raise_error(DuplicateServerError)
 end
 ```
 

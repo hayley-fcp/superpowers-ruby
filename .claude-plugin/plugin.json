@@ -1,7 +1,7 @@
 {
   "name": "superpowers-ruby",
   "description": "Trimmed fork of superpowers-ruby: Brakeman plus process skills that defer to each project's own rules and skills",
-  "version": "7.6.0",
+  "version": "7.7.0",
   "author": {
     "name": "Lucian Ghinda",
     "email": "lucian.ghinda@gmail.com"
@@ -18,6 +18,8 @@
     "debugging",
     "planning",
     "code-review",
-    "tdd"
+    "tdd",
+    "rspec",
+    "rails-8"
   ]
 }

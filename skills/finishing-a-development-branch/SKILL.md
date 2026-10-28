@@ -22,8 +22,8 @@ Verify tests, then let the user decide what happens to the branch.
 Run the project's test suite, using the command the project documents (CLAUDE.md, README, bin/ scripts). Common defaults:
 
 ```bash
-bin/rails test          # Rails with Minitest
 bundle exec rspec       # RSpec
+bin/rails test          # Rails with Minitest
 # npm test / cargo test / pytest / go test ./...  (other project types)
 ```
 

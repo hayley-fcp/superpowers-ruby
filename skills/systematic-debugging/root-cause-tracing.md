@@ -81,7 +81,7 @@ end
 
 **Run and capture:**
 ```bash
-bin/rails test 2>&1 | grep 'DEBUG git init'
+bundle exec rspec 2>&1 | grep 'DEBUG git init'
 ```
 
 **Analyze stack traces:**
@@ -96,7 +96,7 @@ If something appears during tests but you don't know which test:
 Use the bisection script `find-polluter.sh` in this directory:
 
 ```bash
-./find-polluter.sh '.git' 'test/**/*_test.rb'
+./find-polluter.sh '.git' './spec/*_spec.rb'
 ```
 
 Runs tests one-by-one, stops at first polluter. See script for usage.
