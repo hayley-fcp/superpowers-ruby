@@ -69,6 +69,6 @@ After all tasks complete and verified:
 ## Integration
 
 **Required workflow skills:**
-- **superpowers-ruby:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
+- **Feature branch** - REQUIRED: work on a feature branch in the normal checkout, not main/master. Use superpowers-ruby:using-git-worktrees only if the user asks for a worktree
 - **superpowers-ruby:writing-plans** - Creates the plan this skill executes
 - **superpowers-ruby:finishing-a-development-branch** - Complete development after all tasks

@@ -57,6 +57,8 @@ What's different from lucianghinda/rubypowers:
 
 **Git safety**
 
+- No worktrees by default. Plans run on a feature branch in the normal checkout, and `using-git-worktrees` only runs when asked
+
 - Every skill that commits carries the git rules above
 - `finishing-a-development-branch` rewritten: no merge or discard options. It offers keep the branch, or push and open a PR, and only pushes when that option is picked
 - `using-git-worktrees` no longer edits or commits `.gitignore`. It uses a global worktree folder or asks

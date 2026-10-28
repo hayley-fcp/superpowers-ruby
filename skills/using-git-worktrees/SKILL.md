@@ -1,6 +1,6 @@
 ---
 name: using-git-worktrees
-description: Use when starting feature work that needs isolation from current workspace or before executing implementation plans - creates isolated git worktrees with smart directory selection and safety verification. If the project has its own worktree skill, use that one instead.
+description: Use only when the user explicitly asks for a git worktree. Never use it by default for feature work or plans. Creates isolated git worktrees with smart directory selection and safety verification. If the project has its own worktree skill, use that one instead.
 ---
 
 # Using Git Worktrees
@@ -224,10 +224,8 @@ Ready to implement auth feature
 ## Integration
 
 **Called by:**
-- **brainstorming** (Phase 4) - REQUIRED when design is approved and implementation follows
-- **subagent-driven-development** - REQUIRED before executing any tasks
-- **executing-plans** - REQUIRED before executing any tasks
+- Only when the user asks for a worktree. Other skills work on a feature branch in the normal checkout by default
 - Any skill needing isolated workspace
 
 **Pairs with:**
-- **finishing-a-development-branch** - REQUIRED for cleanup after work complete
+- **finishing-a-development-branch** - Leaves the worktree for the user to remove
